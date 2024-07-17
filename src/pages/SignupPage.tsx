@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
-import useSignup from "../hooks/useSignup";
-import { Button } from "../stories/Button";
+import { useEffect, useState } from 'react';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
+import useSignup from '../hooks/useSignup';
 
 export default function SignupPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const { mutate: handleSignup, isSuccess } = useSignup();
 
   useEffect(() => {
     if (isSuccess) {
-      alert("회원가입 성공");
-      navigate("/login");
+      alert('회원가입 성공');
+      navigate('/login');
     }
   }, [isSuccess]);
 
@@ -76,13 +75,13 @@ export default function SignupPage() {
         </InputSection>
       </div>
 
-      <Button
+      <SignupButton
         data-cy="signupButton"
-        primary={true}
-        label="회원가입"
         disabled={!email || !password || password != confirmPassword}
         onClick={() => handleSignup({ username: email, password })}
-      />
+      >
+        회원가입
+      </SignupButton>
     </Wrapper>
   );
 }
@@ -147,8 +146,8 @@ const SignupButton = styled.button`
   padding: 16px;
   border-radius: 4px;
   background-color: ${(props) =>
-    props.disabled ? "var(--mono-100)" : "var(--primary)"};
-  color: ${(props) => (props.disabled ? "var(--mono-200)" : "var(--white)")};
+    props.disabled ? 'var(--mono-100)' : 'var(--primary)'};
+  color: ${(props) => (props.disabled ? 'var(--mono-200)' : 'var(--white)')};
   margin-bottom: 24px;
 `;
 
